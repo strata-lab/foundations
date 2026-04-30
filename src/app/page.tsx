@@ -1,65 +1,113 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { Badge } from "@/components/ui/badge";
+import { LinkButton } from "@/components/link-button";
+import { ArrowRight, Globe, BarChart3, Layers } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Strata Consulting — Web Development & Digital Optimization",
+  description:
+    "We build fast, accessible websites and help businesses optimize their digital footprint and get more from the platforms they already use.",
+};
+
+const services = [
+  {
+    icon: Globe,
+    title: "Website Development",
+    description:
+      "From landing pages to complex web applications. Fast, accessible, and built to convert.",
+  },
+  {
+    icon: BarChart3,
+    title: "Digital Footprint",
+    description:
+      "SEO, structured data, Core Web Vitals, and the technical layer that makes search engines trust you.",
+  },
+  {
+    icon: Layers,
+    title: "Platform Utilization",
+    description:
+      "Get more from the platforms you already pay for. We optimize how your stack works together.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      {/* Hero */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+        <div className="max-w-3xl">
+          <Badge variant="secondary" className="mb-6">
+            Web Development &amp; Digital Optimization
+          </Badge>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-6">
+            Build websites that actually perform.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl leading-relaxed">
+            Strata Consulting builds fast, accessible websites and helps
+            businesses optimize their digital presence from the ground up —
+            from search rankings to platform ROI.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <LinkButton href="/contact" size="lg">
+              Start a project <ArrowRight className="ml-2 h-4 w-4" />
+            </LinkButton>
+            <LinkButton href="/services" size="lg" variant="outline">
+              See what we do
+            </LinkButton>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Services overview */}
+      <section className="border-t border-border bg-muted/30">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
+            Three things we do well
+          </h2>
+          <p className="text-muted-foreground mb-12 max-w-xl">
+            Every engagement lives in one of these categories. Often all three.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map(({ icon: Icon, title, description }) => (
+              <div key={title} className="flex flex-col gap-4">
+                <div className="w-10 h-10 rounded-lg bg-foreground/5 border border-border flex items-center justify-center flex-shrink-0">
+                  <Icon
+                    className="h-5 w-5 text-foreground"
+                    aria-hidden="true"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">{title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12">
+            <LinkButton href="/services" variant="outline">
+              Full service details <ArrowRight className="ml-2 h-4 w-4" />
+            </LinkButton>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* CTA */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="border border-border rounded-2xl p-8 sm:p-12 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
+            Ready to get started?
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+            Tell us what you&apos;re building. We&apos;ll tell you whether we
+            can help and how.
+          </p>
+          <LinkButton href="/contact" size="lg">
+            Get in touch <ArrowRight className="ml-2 h-4 w-4" />
+          </LinkButton>
+        </div>
+      </section>
+    </>
   );
 }

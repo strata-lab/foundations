@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Strata Consulting — Marketing Site
 
-## Getting Started
+The consultancy's own marketing site, built as proof of work for client engagements.
 
-First, run the development server:
+## Stack
+
+| Layer | Choice |
+|-------|--------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Components | shadcn/ui |
+| Email | Resend |
+| Deploy | Vercel (Fluid Compute) |
+
+## Local development
 
 ```bash
+# Copy env vars
+cp .env.local.example .env.local
+# Edit .env.local with your Resend API key and email addresses
+
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | Yes | Production URL (e.g. `https://strataconsult.io`) |
+| `RESEND_API_KEY` | Yes | API key from [resend.com](https://resend.com) |
+| `CONTACT_TO_EMAIL` | Yes | Where contact form submissions land |
+| `CONTACT_FROM_EMAIL` | Yes | Verified sending address in Resend |
 
-## Learn More
+## Deploy to Vercel
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Install Vercel CLI
+npm i -g vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Link and deploy preview
+vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Deploy to production
+vercel --prod
+```
 
-## Deploy on Vercel
+Add all environment variables via `vercel env add` or the Vercel dashboard before deploying.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Pages
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Route | Purpose |
+|-------|---------|
+| `/` | Home — hero + services overview |
+| `/services` | Full service descriptions |
+| `/work` | Case study portfolio (placeholder content) |
+| `/about` | Company story and values |
+| `/contact` | Contact form (Resend delivery + honeypot) |
+
+## SEO
+
+- Metadata on every page (title, description, OG, Twitter card)
+- JSON-LD Organization schema in root layout
+- `sitemap.xml` and `robots.txt` generated via Next.js file conventions
+- `NEXT_PUBLIC_SITE_URL` must be set for correct canonical URLs in production
+
+## Quality targets
+
+| Metric | Target |
+|--------|--------|
+| Lighthouse Performance | ≥ 95 |
+| Lighthouse SEO | ≥ 95 |
+| Lighthouse Accessibility | ≥ 95 |
