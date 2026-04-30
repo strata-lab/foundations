@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import path from "path";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
   turbopack: {
@@ -7,4 +8,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  // Sentry org/project slug — set these if you use source maps upload
+  silent: true,
+  sourcemaps: { disable: true },
+});
