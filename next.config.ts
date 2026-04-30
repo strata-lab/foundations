@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
 
 export default withSentryConfig(nextConfig, {
   // org/project/authToken read from SENTRY_ORG, SENTRY_PROJECT, SENTRY_AUTH_TOKEN env vars.
-  sourcemaps: { disable: true },
+  // Source maps upload only when SENTRY_AUTH_TOKEN is present (i.e. in Vercel production).
+  // deleteSourcemapsAfterUpload keeps .map files off the browser while still sending them to Sentry.
+  sourcemaps: {
+    disable: !process.env.SENTRY_AUTH_TOKEN,
+    deleteSourcemapsAfterUpload: true,
+  },
+  disableLogger: true,
   silent: !process.env.CI,
 });
