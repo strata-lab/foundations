@@ -1,76 +1,83 @@
-# Strata Consulting — Marketing Site
+# Strata Foundations
 
-The consultancy's own marketing site, built as proof of work for client engagements.
+Engineering baseline template for Strata Consult client engagements.
+Every new client repo is forked from this one so the stack decisions don't need to be re-made.
 
 ## Stack
 
 | Layer | Choice |
 |-------|--------|
 | Framework | Next.js 16 (App Router) |
-| Language | TypeScript |
+| Language | TypeScript (strict) |
 | Styling | Tailwind CSS v4 |
-| Components | shadcn/ui |
-| Email | Resend |
-| Deploy | Vercel (Fluid Compute) |
+| UI components | shadcn/ui |
+| Error tracking | Sentry (`@sentry/nextjs` v10) |
+| Hosting | Vercel (strata-labs team) |
+| Package manager | npm |
 
-## Local development
+## Prerequisites
+
+- Node.js 22+
+- npm 10+
+- [Vercel CLI](https://vercel.com/docs/cli): `npm i -g vercel`
+
+## Running locally
 
 ```bash
-# Copy env vars
-cp .env.local.example .env.local
-# Edit .env.local with your Resend API key and email addresses
-
+# 1. Install dependencies
 npm install
+
+# 2. Pull environment variables from Vercel (requires Vercel access)
+vercel env pull .env.local
+
+# 3. Start dev server
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
 
+If you don't have Vercel access yet, copy `.env.example` to `.env.local` and fill in the values manually.
+
 ## Environment variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `NEXT_PUBLIC_SITE_URL` | Yes | Production URL (e.g. `https://strataconsult.io`) |
-| `RESEND_API_KEY` | Yes | API key from [resend.com](https://resend.com) |
-| `CONTACT_TO_EMAIL` | Yes | Where contact form submissions land |
-| `CONTACT_FROM_EMAIL` | Yes | Verified sending address in Resend |
+See `.env.example` for all variables and their descriptions.
+Never commit `.env.local` — it's in `.gitignore`.
 
-## Deploy to Vercel
+## Deploying
+
+Vercel is connected to this repo. Pushes to **any branch** create preview deployments.
+Merges to **`main`** trigger a production deployment automatically.
+
+To deploy manually:
 
 ```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Link and deploy preview
+# Preview
 vercel
 
-# Deploy to production
+# Production
 vercel --prod
 ```
 
-Add all environment variables via `vercel env add` or the Vercel dashboard before deploying.
+## Sentry test event
 
-## Pages
+Once `SENTRY_DSN` is set in Vercel env vars, hit this endpoint to fire a test event:
 
-| Route | Purpose |
-|-------|---------|
-| `/` | Home — hero + services overview |
-| `/services` | Full service descriptions |
-| `/work` | Case study portfolio (placeholder content) |
-| `/about` | Company story and values |
-| `/contact` | Contact form (Resend delivery + honeypot) |
+```
+GET /api/sentry-test
+```
 
-## SEO
+Returns `{ ok: true, sentryEventId: "..." }` and sends a message-level event to Sentry.
 
-- Metadata on every page (title, description, OG, Twitter card)
-- JSON-LD Organization schema in root layout
-- `sitemap.xml` and `robots.txt` generated via Next.js file conventions
-- `NEXT_PUBLIC_SITE_URL` must be set for correct canonical URLs in production
+## Project structure
 
-## Quality targets
-
-| Metric | Target |
-|--------|--------|
-| Lighthouse Performance | ≥ 95 |
-| Lighthouse SEO | ≥ 95 |
-| Lighthouse Accessibility | ≥ 95 |
+```
+app/                 # Next.js App Router pages and API routes
+  api/sentry-test/   # Sentry connectivity test endpoint
+components/ui/       # shadcn/ui components
+docs/                # Architecture decisions and playbooks
+lib/                 # Shared utilities
+public/              # Static assets
+sentry.*.config.ts   # Sentry SDK init (client / server / edge)
+instrumentation.ts   # Next.js instrumentation entry point
+.env.example         # Template for required environment variables
+```
