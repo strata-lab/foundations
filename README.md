@@ -1,83 +1,51 @@
 # Strata Foundations
 
-Engineering baseline template for Strata Consult client engagements.
-Every new client repo is forked from this one so the stack decisions don't need to be re-made.
+The engineering team's reference manual. This is not a deployable app — it's a living collection of how-we-work documents covering our default stack, delivery process, and operational playbooks.
+
+Every new client engagement starts here. New team members read this on day one.
+
+---
 
 ## Stack
 
-| Layer | Choice |
-|-------|--------|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript (strict) |
-| Styling | Tailwind CSS v4 |
-| UI components | shadcn/ui |
-| Error tracking | Sentry (`@sentry/nextjs` v10) |
-| Hosting | Vercel (strata-labs team) |
-| Package manager | npm |
+Decisions we've already made — don't relitigate them.
 
-## Prerequisites
+| Doc | What it covers |
+|-----|---------------|
+| [stack/default-stack.md](stack/default-stack.md) | Our default technology choices: Next.js App Router, TypeScript, Tailwind, shadcn/ui, Vercel, Sentry |
+| [stack/why-not.md](stack/why-not.md) | Rejected alternatives and why, so we don't keep having the same conversation |
 
-- Node.js 22+
-- npm 10+
-- [Vercel CLI](https://vercel.com/docs/cli): `npm i -g vercel`
+---
 
-## Running locally
+## Delivery
 
-```bash
-# 1. Install dependencies
-npm install
+How we build and ship.
 
-# 2. Pull environment variables from Vercel (requires Vercel access)
-vercel env pull .env.local
+| Doc | What it covers |
+|-----|---------------|
+| [delivery/repo-template.md](delivery/repo-template.md) | Step-by-step: how to start a new client repo, naming conventions, git workflow |
+| [delivery/deploy-pattern.md](delivery/deploy-pattern.md) | Vercel project setup, preview/production branches, rollbacks, custom domains |
+| [delivery/env-management.md](delivery/env-management.md) | `vercel env pull`, `.env.example` conventions, per-environment scoping, OIDC |
+| [delivery/observability.md](delivery/observability.md) | When to wire Sentry, what to monitor, alert thresholds |
+| [delivery/qa-checklist.md](delivery/qa-checklist.md) | Pre-launch checklist: SEO, performance, accessibility, content, security |
 
-# 3. Start dev server
-npm run dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000).
+## Ops
 
-If you don't have Vercel access yet, copy `.env.example` to `.env.local` and fill in the values manually.
+What happens after launch.
 
-## Environment variables
+| Doc | What it covers |
+|-----|---------------|
+| [ops/incident-playbook.md](ops/incident-playbook.md) | What to do when a client site goes down, severity levels, communication templates |
+| [ops/handoff-package.md](ops/handoff-package.md) | What we hand to a client at end of engagement: access, docs, handoff call checklist |
 
-See `.env.example` for all variables and their descriptions.
-Never commit `.env.local` — it's in `.gitignore`.
+---
 
-## Deploying
+## Contributing
 
-Vercel is connected to this repo. Pushes to **any branch** create preview deployments.
-Merges to **`main`** trigger a production deployment automatically.
+These are living documents. When you make a decision on a client project that contradicts a default here, either:
+- Update this repo if the decision should become the new default, **or**
+- Document the override in the client repo under `docs/stack-overrides.md` if it's client-specific.
 
-To deploy manually:
-
-```bash
-# Preview
-vercel
-
-# Production
-vercel --prod
-```
-
-## Sentry test event
-
-Once `SENTRY_DSN` is set in Vercel env vars, hit this endpoint to fire a test event:
-
-```
-GET /api/sentry-test
-```
-
-Returns `{ ok: true, sentryEventId: "..." }` and sends a message-level event to Sentry.
-
-## Project structure
-
-```
-app/                 # Next.js App Router pages and API routes
-  api/sentry-test/   # Sentry connectivity test endpoint
-components/ui/       # shadcn/ui components
-docs/                # Architecture decisions and playbooks
-lib/                 # Shared utilities
-public/              # Static assets
-sentry.*.config.ts   # Sentry SDK init (client / server / edge)
-instrumentation.ts   # Next.js instrumentation entry point
-.env.example         # Template for required environment variables
-```
+Changes follow the same process as code: PR against `main`, at least one review.
