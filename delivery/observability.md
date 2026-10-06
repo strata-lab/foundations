@@ -39,8 +39,8 @@ Wire Sentry before any client-facing deploy. Non-negotiable.
 
 | Signal | Threshold | Action |
 |--------|-----------|--------|
-| New unhandled exception | First occurrence | Notify on-call |
-| Error rate spike | > 5× baseline in 5 min | Page on-call |
+| New unhandled exception | First occurrence | Notify the engineer responsible for the project |
+| Error rate spike | > 5× baseline in 5 min | Escalate to the engineer responsible for the project immediately |
 | P95 response time | > 3 s on key routes | Investigate next business day |
 | Apdex score | < 0.8 | Review in next sprint |
 

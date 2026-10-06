@@ -2,10 +2,17 @@
 
 What to do when a client site is unavailable or behaving incorrectly in production.
 
+> **Scope.** This is our internal working playbook. The targets below are the targets we set
+> ourselves — they are **not** a service-level commitment to any client. What we owe a
+> particular client is whatever their signed support or retainer agreement says, and nothing
+> in this repository varies it.
+
 ## Severity levels
 
-| Severity | Definition | Response time |
-|----------|------------|---------------|
+Internal targets, measured from the point an incident is confirmed.
+
+| Severity | Definition | Internal response target |
+|----------|------------|--------------------------|
 | P1 — Site down | Homepage / core flows return 5xx or timeout | Within 30 min |
 | P2 — Core feature broken | Checkout, forms, key pages broken but site loads | Within 2 hours |
 | P3 — Degraded experience | Visual/layout issues, non-critical feature broken | Next business day |

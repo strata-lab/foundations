@@ -1,8 +1,12 @@
 # Strata Foundations
 
-The engineering team's reference manual. This is not a deployable app — it's a living collection of how-we-work documents covering our default stack, delivery process, and operational playbooks.
+The engineering team's reference manual. **Documentation only — there is no application code in this repository.**
 
-Every new client engagement starts here. New team members read this on day one.
+It covers the defaults we apply to **greenfield web builds**: our standard stack, how we start and ship a client repo, our pre-launch QA checklist, and our incident and handoff playbooks. It is not a statement of everything we deliver, and it does not govern enterprise platform engagements, which are scoped per engagement.
+
+Every greenfield web engagement starts from these defaults. New team members read this on day one.
+
+This repository is public deliberately. It is how we work, written down.
 
 ---
 
@@ -12,7 +16,7 @@ Decisions we've already made — don't relitigate them.
 
 | Doc | What it covers |
 |-----|---------------|
-| [stack/default-stack.md](stack/default-stack.md) | Our default technology choices: Next.js App Router, TypeScript, Tailwind, shadcn/ui, Vercel, Sentry |
+| [stack/default-stack.md](stack/default-stack.md) | Our default technology choices for greenfield web builds: Next.js App Router, TypeScript, Tailwind, shadcn/ui, Vercel, Sentry |
 | [stack/why-not.md](stack/why-not.md) | Rejected alternatives and why, so we don't keep having the same conversation |
 
 ---
