@@ -1,6 +1,12 @@
 # Default Stack
 
-Strata's opinionated defaults for every client engagement. These are the decisions we have already made — don't re-litigate them unless you have a strong reason and document the override in the client's `docs/` folder.
+## Scope
+
+These are Strata's opinionated defaults for **greenfield web builds** — a new web application or marketing site, started from scratch and deployed by us.
+
+They are **not** a statement of everything we deliver, and they do not govern enterprise platform engagements, which are scoped per engagement against the client's existing platform.
+
+Within that scope, these are the decisions we have already made — don't re-litigate them unless you have a strong reason and document the override in the client's `docs/` folder.
 
 ## Core choices
 

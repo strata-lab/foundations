@@ -10,7 +10,7 @@ How to spin up a net-new client project from scratch.
 
 ## Steps
 
-1. **Create repo** in the `strata-lab` GitHub org. Name: `strata-lab/<client-short-name>` (e.g. `strata-lab/trinity-legal`).
+1. **Create repo** in the `strata-lab` GitHub org. Name: `strata-lab/<client-short-name>` (e.g. `strata-lab/example-client`).
 
 2. **Scaffold the app**
 
@@ -53,8 +53,8 @@ How to spin up a net-new client project from scratch.
 
 | Thing | Convention | Example |
 |-------|-----------|---------|
-| Repo | `strata-lab/<client>` | `strata-lab/patraj-realty` |
-| Vercel project | `<client>` | `patraj-realty` |
+| Repo | `strata-lab/<client>` | `strata-lab/example-client` |
+| Vercel project | `<client>` | `example-client` |
 | Branch: features | `feat/<short-description>` | `feat/property-listings` |
 | Branch: fixes | `fix/<short-description>` | `fix/mobile-nav-overlap` |
 
